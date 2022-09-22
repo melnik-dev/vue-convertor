@@ -1,7 +1,7 @@
 <template>
   <div class="App">
-    <convertBlock :value="0" :currency="'RUB'"/>
-    <convertBlock :value="0" :currency="'USD'"/>
+    <convertBlock :value="0" :currency="fromCurrency" @onChangeCurrency="fromChangeCurrency"/>
+    <convertBlock :value="0" :currency="toCurrency" @onChangeCurrency="toChangeCurrency"/>
   </div>
 </template>
 
@@ -15,7 +15,19 @@ export default {
   },
   data() {
     return {
-      rates: {}
+      rates: {},
+      fromCurrency: "RUB",
+      toCurrency: "USD",
+    }
+  },
+  methods: {
+    fromChangeCurrency(cur) {
+      this.fromCurrency = cur
+      console.log(this.fromCurrency);
+    },
+    toChangeCurrency(cur) {
+      this.toCurrency = cur
+      console.log(this.toCurrency);
     }
   },
   created() {

@@ -1,7 +1,7 @@
 <template lang="pug">
 .block
   ul.currencies
-    li(v-for="cur in defaultCurrencies" :key="cur" @click="onChangeCurrency" :class="currency === cur ? 'active' : ''") {{cur}}
+    li(v-for="cur in defaultCurrencies" :key="cur" @click="onChangeCurrency(cur)" :class="currency === cur ? 'active' : ''") {{cur}}
     li
       svg(height="50px" viewBox="0 0 50 50" width="50px")
         rect(fill="none" height="50" width="50")
@@ -14,17 +14,18 @@
 export default {
   name: "convertBlock",
   props:["value", "currency"],
+  emits: ["onChangeCurrency"],
   data() {
     return {
       defaultCurrencies: ["RUB", "USD", "EUR", "GBR"],
     }
   },
   methods:{
-    onChangeCurrency() {
-      console.log("onChangeCurrency")
+    onChangeCurrency(cur) {
+      this.$emit("onChangeCurrency", cur);
     },
     onChangeValue() {
-      console.log("onChangeValue")
+      console.log("onChangeValue");
     }
   }
 }
