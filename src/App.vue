@@ -12,6 +12,22 @@ export default {
   name: 'App',
   components: {
     convertBlock
+  },
+  data() {
+    return {
+      rates: {}
+    }
+  },
+  created() {
+    fetch('https://cdn.cur.su/api/latest.json')
+          .then((res) => res.json())
+          .then((json) => {
+              this.rates = json.rates;
+              console.log(this.rates);
+          }).catch(err => {
+      console.warn(err);
+      alert("не удалось получить инфорамцию")
+    })
   }
 }
 </script>
