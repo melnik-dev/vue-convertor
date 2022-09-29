@@ -32,12 +32,14 @@ export default {
       console.log(this.toCurrency);
     },
     fromChangePrice(value) {
-      this.fromPrice = value;
-      console.log("fromChangePrice", value);
+      const price = value / this.rates[this.fromCurrency];
+      const result = price * this.rates[this.toCurrency];
+      this.toPrice = result;
+
     },
     toChangePrice(value) {
-      this.tomPrice = value;
-      console.log("toChangePrice", value);
+      const result = (this.rates[this.fromCurrency] / this.rates[this.toCurrency]) * value;
+      this.fromPrice = result;
     }
   },
   created() {
