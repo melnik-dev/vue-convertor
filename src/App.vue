@@ -1,7 +1,7 @@
 <template>
   <div class="App">
-    <convertBlock :value="fromPrice" :currency="fromCurrency" @onChangeCurrency="fromChangeCurrency" @onChangeValue="fromChangePrice"/>
-    <convertBlock :value="toPrice" :currency="toCurrency" @onChangeCurrency="toChangeCurrency" @onChangeValue="toChangePrice"/>
+    <convertBlock v-model="fromPrice" :currency="fromCurrency" @onChangeCurrency="fromChangeCurrency" @onChangeValue="fromChangePrice"/>
+    <convertBlock v-model="toPrice" :currency="toCurrency" @onChangeCurrency="toChangeCurrency" @onChangeValue="toChangePrice"/>
   </div>
 </template>
 
@@ -24,11 +24,13 @@ export default {
   },
   methods: {
     fromChangeCurrency(cur) {
-      this.fromCurrency = cur
+      this.fromCurrency = cur;
+      this.fromChangePrice(this.fromPrice);
       console.log(this.fromCurrency);
     },
     toChangeCurrency(cur) {
       this.toCurrency = cur
+      this.toChangePrice(this.toPrice);
       console.log(this.toCurrency);
     },
     fromChangePrice(value) {
