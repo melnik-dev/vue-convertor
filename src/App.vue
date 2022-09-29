@@ -19,29 +19,31 @@ export default {
       fromCurrency: "RUB",
       toCurrency: "USD",
       fromPrice: 0,
-      toPrice: 0
+      toPrice: 1
     }
   },
   methods: {
     fromChangeCurrency(cur) {
       this.fromCurrency = cur;
-      this.fromChangePrice(this.fromPrice);
+      this.toChangePrice(this.toPrice);
       console.log(this.fromCurrency);
     },
     toChangeCurrency(cur) {
       this.toCurrency = cur
-      this.toChangePrice(this.toPrice);
+      this.fromChangePrice(this.fromPrice);
+
+
       console.log(this.toCurrency);
     },
     fromChangePrice(value) {
       const price = value / this.rates[this.fromCurrency];
       const result = price * this.rates[this.toCurrency];
-      this.toPrice = result;
+      this.toPrice = result.toFixed(3);
 
     },
     toChangePrice(value) {
       const result = (this.rates[this.fromCurrency] / this.rates[this.toCurrency]) * value;
-      this.fromPrice = result;
+      this.fromPrice = result.toFixed(3);
     }
   },
   created() {
@@ -50,6 +52,7 @@ export default {
           .then((json) => {
               this.rates = json.rates;
               console.log(this.rates);
+              this.toChangePrice(1)
           }).catch(err => {
       console.warn(err);
       alert("не удалось получить инфорамцию")

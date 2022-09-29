@@ -17,7 +17,7 @@ export default {
   emits: ["onChangeCurrency", "onChangeValue", "update:modelValue"],
   data() {
     return {
-      defaultCurrencies: ["RUB", "USD", "EUR", "GBR"],
+      defaultCurrencies: ["RUB", "USD", "EUR", "GBP"],
     }
   },
   methods:{
